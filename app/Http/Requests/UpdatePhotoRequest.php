@@ -11,7 +11,7 @@ class UpdatePhotoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdatePhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|unique:photos|max:100',
+            'description' => 'required',
+            'image' => 'required|image|max:500',
+            'category' => 'required',
+            'priority' => 'nullable'
         ];
     }
 }

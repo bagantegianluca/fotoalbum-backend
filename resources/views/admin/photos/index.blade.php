@@ -9,6 +9,9 @@
 </header>
 
 <div class="container mt-3">
+
+    @include('partials.messages')
+
     <a class="btn btn-primary mb-3" href="{{route('admin.photos.create')}}">{{__('New')}}</a>
     <div
         class="table-responsive-md"
@@ -48,8 +51,14 @@
                     </td>
                     <td>{{$photo->category}}</td>
                     <td>{{$photo->tags}}</td>
-                    <td>{{$photo->priority}}</td>
-                    <td><a href="">View</a> | <a href="">Edit</a> | <a href="">Delete</a></td>
+                    <td>
+                        @if ($photo->priority)
+                        <div class="fw-bold text-danger">High</div>
+                        @endif
+                    </td>
+                    <td><a class="btn btn-primary btn-sm" href="{{route('admin.photos.show', $photo)}}">View</a>
+                        <a class="btn btn-secondary btn-sm" href="{{route('admin.photos.edit', $photo)}}">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="{{route('admin.photos.destroy', $photo)}}">Delete</a></td>
                 </tr>
                 @empty
                 <tr class="table-dark">
