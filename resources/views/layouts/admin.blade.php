@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -46,6 +46,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.photos.index') }}">{{ __('Photos') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -67,7 +70,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('dashboard') }}">{{__('Dashboard')}}</a>
+                                <a class="dropdown-item" href="{{ url('admin') }}">{{__('Dashboard')}}</a>
                                 <a class="dropdown-item" href="{{ url('profile') }}">{{__('Profile')}}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
