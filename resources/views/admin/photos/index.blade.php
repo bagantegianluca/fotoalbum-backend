@@ -23,6 +23,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Title</th>
+                    <th>Slug</th>
                     <th>Description</th>
                     <th>Image</th>
                     <th>Category</th>
@@ -36,8 +37,15 @@
                 <tr class="table-dark">
                     <td scope="row">{{$photo->id}}</td>
                     <td>{{$photo->title}}</td>
+                    <td>{{$photo->slug}}</td>
                     <td>{{$photo->description}}</td>
-                    <td><img width="120" src="{{$photo->image}}" alt=""></td>
+                    <td>
+                        @if (Str::startsWith($photo->image, 'https://'))
+                        <img width="120" src="{{$photo->image}}" alt="">                            
+                        @else
+                        <img width="120" src="{{asset('storage/' . $photo->image)}}" alt="">
+                        @endif
+                    </td>
                     <td>{{$photo->category}}</td>
                     <td>{{$photo->tags}}</td>
                     <td>{{$photo->priority}}</td>
@@ -45,7 +53,7 @@
                 </tr>
                 @empty
                 <tr class="table-dark">
-                    <td scope="row" colspan="8">No photos in archive</td>
+                    <td scope="row" colspan="9">No photos in archive</td>
                 </tr>
                 @endforelse
             </tbody>

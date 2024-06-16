@@ -22,10 +22,11 @@ class StorePhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:100',
+            'title' => 'required|unique:photos|max:100',
             'description' => 'required',
             'image' => 'required|image|max:500',
-            'category' => 'required'
+            'category' => 'required',
+            'priority' => 'nullable'
         ];
     }
 }

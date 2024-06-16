@@ -6,6 +6,7 @@ use App\Models\Photo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 class PhotoSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class PhotoSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $photo = new Photo();
             $photo->title = $faker->words(5, true);
+            $photo->slug = Str::slug($photo->title, '-');
             $photo->description = $faker->paragraphs(5, true);
             $photo->image = $faker->imageUrl(640, 400, 'photos', true, $photo->title, false, 'jpg');
             $photo->category = $faker->words(1, true);

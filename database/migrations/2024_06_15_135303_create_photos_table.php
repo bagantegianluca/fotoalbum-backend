@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100);
+            $table->string('title', 100)->unique();
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('image');
             $table->string('category')->nullable();

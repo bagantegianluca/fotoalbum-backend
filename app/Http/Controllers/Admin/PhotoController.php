@@ -7,6 +7,7 @@ use App\Http\Requests\StorePhotoRequest;
 use App\Http\Requests\UpdatePhotoRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PhotoController extends Controller
 {
@@ -15,7 +16,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        return view('admin.photos.index', ['photos' => Photo::orderByDesc('id')->paginate(8)]);
+        $photos = Photo::orderByDesc('id')->paginate(8);
+        return view('admin.photos.index', compact('photos'));
     }
 
     /**
@@ -31,12 +33,13 @@ class PhotoController extends Controller
      */
     public function store(StorePhotoRequest $request)
     {
-        //dd($request->all());
+
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($request->title, '-');
         $validated['image'] = Storage::put('uploads', $request->image);
-        dd($validated);
+        $validated['priority'] = $request->has('priority') ? 1 : 0;
         Photo::create($validated);
-        return to_route('admin.photo.index')->with('message', 'Photo added properly');
+        return to_route('admin.photos.index')->with('message', 'Photo added properly');
     }
 
     /**

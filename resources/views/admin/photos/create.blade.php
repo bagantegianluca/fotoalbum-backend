@@ -12,7 +12,7 @@
 
 @include('partials.errors')
 
-    <form action="{{route('admin.photos.store')}}" method="post">
+    <form action="{{route('admin.photos.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mt-3">
             {{-- <label for="title" class="form-label">Title</label> --}}
@@ -74,7 +74,7 @@
         @enderror
 
         <div class="mt-3 form-check">
-            <input class="form-check-input" type="checkbox" value="{{old('priority')}}" id="priority" name="priority"/>
+            <input class="form-check-input" type="checkbox" id="priority" name="priority" value="{{ old('priority') ?? 0 }}"/>
             <label class="form-check-label" for="priority">Priority</label>
         </div>
         @error('priority')
