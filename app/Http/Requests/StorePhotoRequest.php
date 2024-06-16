@@ -23,9 +23,9 @@ class StorePhotoRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:photos|max:100',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'required',
             'image' => 'required|image|max:500',
-            'category' => 'required',
             'priority' => 'nullable'
         ];
     }

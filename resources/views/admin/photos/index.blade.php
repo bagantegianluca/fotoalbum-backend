@@ -49,7 +49,7 @@
                         <img width="120" src="{{asset('storage/' . $photo->image)}}" alt="">
                         @endif
                     </td>
-                    <td>{{$photo->category}}</td>
+                    <td>{{$photo->category->name}}</td>
                     <td>{{$photo->tags}}</td>
                     <td>
                         @if ($photo->priority)

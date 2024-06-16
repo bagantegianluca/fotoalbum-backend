@@ -23,7 +23,7 @@
             <p><strong>Title: </strong>{{$photo->title}}</p>
             <p><strong>Slug: </strong>{{$photo->slug}}</p>
             <p><strong>Description: </strong>{{$photo->description}}</p>
-            <p><strong>Category: </strong>{{$photo->category}}</p>
+            <p><strong>Category: </strong>{{$photo->category->name}}</p>
             <p><strong>Tags: </strong>{{$photo->tags}}</p>
             <p><strong>Priority: </strong>{{$photo->priority}}</p>
         </div>

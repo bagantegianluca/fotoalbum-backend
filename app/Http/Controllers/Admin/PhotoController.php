@@ -6,6 +6,7 @@ use App\Models\Photo;
 use App\Http\Requests\StorePhotoRequest;
 use App\Http\Requests\UpdatePhotoRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -25,7 +26,8 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        return view('admin.photos.create');
+        $categories = Category::all();
+        return view('admin.photos.create', compact('categories'));
     }
 
     /**
@@ -33,11 +35,13 @@ class PhotoController extends Controller
      */
     public function store(StorePhotoRequest $request)
     {
-
+        //dd($request->all());
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
         $validated['image'] = Storage::put('uploads', $request->image);
         $validated['priority'] = $request->has('priority') ? 1 : 0;
+
+        //dd($validated);
         Photo::create($validated);
         return to_route('admin.photos.index')->with('message', 'Photo added properly');
     }
@@ -55,7 +59,8 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        return view('admin.photos.edit', compact('photo'));
+        $categories = Category::all();
+        return view('admin.photos.edit', compact('photo', 'categories'));
     }
 
     /**

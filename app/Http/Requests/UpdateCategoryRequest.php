@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePhotoRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,11 +22,7 @@ class UpdatePhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:photos|max:100',
-            'category_id' => 'required|exists:categories,id',
-            'description' => 'required',
-            'image' => 'required|image|max:500',
-            'priority' => 'nullable'
+            //
         ];
     }
 }

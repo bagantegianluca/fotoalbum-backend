@@ -68,19 +68,21 @@
         @enderror
 
         <div class="mt-3">
-            {{-- <label for="Category" class="form-label">Category</label> --}}
-            <input
-                type="text"
-                class="form-control"
-                name="category"
-                id="category"
-                aria-describedby="categoryhelper"
-                placeholder="Type your category here"
-                value="{{old('category', $photo->category)}}"
-            />
-            <small id="categoryhelper" class="form-text text-muted">Category</small>
+            <label for="category_id" class="form-label">Category</label>
+            <select
+                class="form-select"
+                name="category_id"
+                id="category_id"
+            >
+                <option selected disabled>Select one</option>
+                
+                @foreach ($categories as $category)
+                <option value="{{$category->id}}" {{$category->id == old('category_id', $photo->category->id) ? 'selected' : ''}}>{{$category->name}}</option>
+                @endforeach
+
+            </select>
         </div>
-        @error('category')
+        @error('category_id')
         <div class="text-danger">{{$message}}</div>
         @enderror
 
