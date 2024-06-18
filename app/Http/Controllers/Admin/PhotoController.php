@@ -17,7 +17,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photos = Photo::orderByDesc('id')->paginate(8);
+        $photos = Photo::orderByRaw('priority DESC, id DESC')->paginate(5);
         return view('admin.photos.index', compact('photos'));
     }
 
