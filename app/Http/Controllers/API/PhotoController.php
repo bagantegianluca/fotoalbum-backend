@@ -8,11 +8,18 @@ use App\Models\Photo;
 
 class PhotoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('search')) {
+            return response()->json([
+                'success' => true,
+                'results' => Photo::with(['category'])->orderByRaw('priority DESC, id DESC')->where('title', 'like', '%' . $request->search . '%')->paginate(8),
+            ]);
+        }
+
         return response()->json([
             'success' => true,
-            'results' => Photo::with(['category'])->orderByRaw('priority DESC, id DESC')->paginate(),
+            'results' => Photo::with(['category'])->orderByRaw('priority DESC, id DESC')->paginate(8),
         ]);
     }
 
